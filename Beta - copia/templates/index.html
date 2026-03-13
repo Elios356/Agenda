@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="glass-card">
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 25px;">
+        <div>
+            <h1 style="margin:0; font-size:1.4rem; font-weight:800;">AGENDA <span style="color:var(--accent)">PRO</span></h1>
+            <small style="opacity:0.6;">Hola, {{ usuario }}</small>
+        </div>
+        <div style="display:flex; gap:8px;">
+            <a href="{{ url_for('backup') }}" class="nav-icon">💾</a>
+            <a href="{{ url_for('perfil') }}" class="nav-icon">👤</a>
+        </div>
+    </div>
+
+    <div style="display: flex; gap: 10px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 20px; margin-bottom: 20px;">
+        <div style="flex:1;">Pendientes: <b style="color:var(--accent)">{{ pendientes }}</b></div>
+        <div style="flex:1; border-left: 1px solid rgba(255,255,255,0.1);">Hechas: <b style="color:var(--success)">{{ completadas }}</b></div>
+    </div>
+
+    <form method="GET" action="/">
+        <input type="text" name="search" placeholder="🔍 Buscar tarea..." value="{{ request.args.get('search', '') }}">
+        <select name="materia_filtro" onchange="this.form.submit()">
+            <option value="">Todas las Materias</option>
+            {% for m in materias %}
+            <option value="{{ m }}" {{ 'selected' if request.args.get('materia_filtro') == m else '' }}>{{ m }}</option>
+            {% endfor %}
+        </select>
+    </form>
+
+    <div style="display:flex; gap:10px; margin-bottom:20px;">
+        <a href="{{ url_for('crear') }}" class="btn-main" style="flex:4;">+ NUEVA TAREA</a>
+        <a href="{{ url_for('limpiar') }}" class="btn-main" style="flex:1; background:var(--input); font-size:1.2rem;">🧹</a>
+    </div>
+
+    <div style="max-height: 400px; overflow-y: auto; padding-right: 5px;">
+        {% for tarea in tareas %}
+        <div class="task-item {{ 'priority' if tarea.importante }}">
+            <div style="display:flex; align-items:center; gap:15px; text-align: left;">
+                <a href="{{ url_for('completar', id=tarea.id) }}" style="text-decoration:none; font-size: 1.4rem;">⭕</a>
+                <div>
+                    <span class="tag-materia" style="--mat-color: {{ tarea.color }};">{{ tarea.materia }}</span>
+                    <div style="font-weight:600; font-size:1.05rem;">{{ tarea.tema }}</div>
+                    <small style="opacity: 0.5;">📅 {{ tarea.fecha }}</small>
+                </div>
+            </div>
+            
+            <div style="display:flex; gap:10px;">
+                <a href="{{ url_for('editar', id=tarea.id) }}" style="text-decoration:none;">✏️</a>
+                <a href="{{ url_for('eliminar', id=tarea.id) }}" style="text-decoration:none;" onclick="return confirm('¿Eliminar?')">🗑️</a>
+            </div>
+        </div>
+        {% else %}
+        <div style="padding: 40px 0; opacity: 0.4;">
+            <div style="font-size: 3rem;">✨</div>
+            <p>¡Todo al día!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

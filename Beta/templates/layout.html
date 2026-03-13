@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Pro | Premium</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+</head>
+<body>
+    <button class="theme-toggle" onclick="document.body.classList.toggle('light-mode')">🌓</button>
+    {% block content %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Registro de Usuarios</title>
+
+<link rel="stylesheet" href="style.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Registro de Usuarios</h1>
+
+<div class="form">
+
+<input id="nombre" type="text" placeholder="Nombre">
+
+<input id="edad" type="number" placeholder="Edad">
+
+<button onclick="registrarUsuario()">Guardar</button>
+
+<p id="mensaje"></p>
+
+</div>
+
+<div class="tabla">
+
+<h2>Usuarios registrados</h2>
+
+<table>
+
+<thead>
+<tr>
+<th>Nombre</th>
+<th>Edad</th>
+<th>Categoría</th>
+</tr>
+</thead>
+
+<tbody id="listaUsuarios"></tbody>
+
+</table>
+
+<button class="delete" onclick="limpiarDB()">Vaciar tabla</button>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>

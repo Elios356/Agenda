@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="glass-card">
+    <h2 style="margin-bottom:30px; font-weight:800;">{{ 'EDITAR' if tarea else 'NUEVA' }} TAREA</h2>
+    <form method="POST">
+        <input type="text" name="materia" placeholder="Materia (ej: Programación)" value="{{ tarea.materia if tarea else '' }}" required>
+        <input type="text" name="tema" placeholder="¿Qué hay que hacer?" value="{{ tarea.tema if tarea else '' }}" required>
+        <input type="date" name="fecha" value="{{ tarea.fecha if tarea else '' }}" required>
+        
+        <div style="display:flex; align-items:center; gap:10px; margin: 20px 0; background:rgba(239, 68, 68, 0.1); padding:15px; border-radius:15px; border:1px solid rgba(239, 68, 68, 0.2);">
+            <input type="checkbox" name="importante" id="imp" style="width:auto; margin:0;" {{ 'checked' if tarea and tarea.importante else '' }}>
+            <label for="imp" style="font-weight:700; color:var(--important); cursor:pointer;">¿ES PRIORIDAD ALTA? 🔥</label>
+        </div>
+
+        <button type="submit" class="btn-main">GUARDAR TAREA</button>
+        <div style="margin-top:20px;">
+            <a href="{{ url_for('index') }}" style="color:var(--text-muted); text-decoration:none; font-size:0.9rem;">Cancelar y volver</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

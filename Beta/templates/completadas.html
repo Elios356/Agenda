@@ -1,0 +1,30 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="glass-card">
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="margin:0; font-weight:800;">HISTORIAL <span style="color:var(--success)">HECHO</span></h2>
+        <a href="{{ url_for('limpiar') }}" onclick="return confirm('¿Borrar todo permanentemente?')" style="text-decoration:none; font-size:1.2rem; opacity:0.5;">🗑️</a>
+    </div>
+
+    <div style="max-height: 450px; overflow-y: auto;">
+        {% for tarea in tareas %}
+        <div class="task-item" style="opacity: 0.6; background: rgba(0,0,0,0.1);">
+            <div>
+                <span style="font-size:0.65rem; font-weight:800; text-transform:uppercase; color:var(--text-dim);">{{ tarea.materia }}</span>
+                <div style="text-decoration: line-through; font-weight:700; margin-top:3px;">{{ tarea.tema }}</div>
+            </div>
+            <div style="display:flex; gap:15px;">
+                <a href="{{ url_for('restaurar', id=tarea.id) }}" title="Restaurar" style="text-decoration:none;">🔄</a>
+                <a href="{{ url_for('eliminar', id=tarea.id) }}" style="text-decoration:none;">✖</a>
+            </div>
+        </div>
+        {% else %}
+        <div style="padding:40px; opacity:0.3;">El historial está vacío.</div>
+        {% endfor %}
+    </div>
+    
+    <div style="margin-top:25px;">
+        <a href="{{ url_for('index') }}" style="color:var(--accent); text-decoration:none; font-weight:700; font-size:0.9rem;">← VOLVER AL PANEL</a>
+    </div>
+</div>
+{% endblock %}

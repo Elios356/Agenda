@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="glass-card">
+    <h1 style="font-weight:800; margin-bottom:10px;">INICIAR <span style="color:var(--accent)">SESIÓN</span></h1>
+    <p style="margin-bottom:25px; opacity:0.8; font-size: 0.9rem;">Ingresa a tu agenda personal</p>
+    
+    <form method="POST" action="{{ url_for('login') }}">
+        <input type="text" name="usuario" placeholder="Usuario" required autocomplete="username">
+        <input type="password" name="password" placeholder="Contraseña" required autocomplete="current-password">
+        <button type="submit" class="btn-main" style="margin-top: 10px;">ENTRAR</button>
+    </form>
+    
+    <div style="margin-top:25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top:20px;">
+        <p style="font-size: 0.85rem;">
+            ¿No tienes cuenta? 
+            <a href="{{ url_for('registro') }}" style="color:var(--accent); text-decoration:none; font-weight:700;">Regístrate aquí</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

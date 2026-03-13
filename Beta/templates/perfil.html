@@ -1,0 +1,19 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="glass-card">
+    <div class="profile-container">
+        <div style="font-size: 5rem; filter: drop-shadow(0 0 10px var(--accent));">👤</div>
+        
+        <h2 style="margin: 0; letter-spacing: 2px;">{{ user.usuario.upper() }}</h2>
+        
+        <div style="width: 50px; height: 3px; background: var(--accent); border-radius: 10px; margin: 15px 0;"></div>
+        
+        <p style="opacity: 0.7;">Panel de Control Profesional</p>
+        
+        <div style="width: 100%; margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <a href="{{ url_for('index') }}" class="btn-main">VOLVER A LA AGENDA</a>
+            <a href="{{ url_for('logout') }}" class="btn-logout">Cerrar Sesión</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

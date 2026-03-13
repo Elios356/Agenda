@@ -1,0 +1,33 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="glass-card" style="max-width: 420px;">
+    <div style="margin-bottom:30px;">
+        <div style="font-size:3rem; margin-bottom:10px;">💎</div>
+        <h1 style="font-weight:800; margin:0;">BIENVENIDO</h1>
+        <p style="opacity:0.5; font-size:0.9rem;">Accede a tu espacio de trabajo</p>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div style="background:rgba(244,63,94,0.1); color:var(--danger); padding:12px; border-radius:12px; margin-bottom:20px; font-size:0.85rem; border:1px solid rgba(244,63,94,0.2);">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    <form method="POST">
+        <input type="text" name="usuario" placeholder="Nombre de usuario" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit" class="btn-main" style="margin-top:10px;">INICIAR SESIÓN</button>
+    </form>
+    
+    <div style="margin-top:30px; padding-top:20px; border-top:1px solid var(--border-color);">
+        <p style="font-size:0.85rem; opacity:0.6;">
+            ¿No tienes cuenta? 
+            <a href="{{ url_for('registro') }}" style="color:var(--accent); text-decoration:none; font-weight:700;">Regístrate ahora</a>
+        </p>
+    </div>
+</div>
+{% endblock %}

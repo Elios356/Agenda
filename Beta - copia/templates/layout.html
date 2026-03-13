@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='estilos.css') }}">
+
+<title>Agenda Pro</title>
+
+<script>
+function toggleTheme(){
+    document.body.classList.toggle("light-mode")
+
+    if(document.body.classList.contains("light-mode")){
+        localStorage.setItem("theme","light")
+    }else{
+        localStorage.setItem("theme","dark")
+    }
+}
+
+window.onload=function(){
+    if(localStorage.getItem("theme")==="light"){
+        document.body.classList.add("light-mode")
+    }
+}
+</script>
+
+</head>
+
+<body>
+
+<button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

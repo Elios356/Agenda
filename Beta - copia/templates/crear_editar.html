@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="glass-card">
+    <h2 style="font-weight:800; margin-bottom: 25px;">{{ 'EDITAR' if tarea else 'NUEVA' }} TAREA</h2>
+    <form method="POST">
+        <label style="display:block; text-align:left; font-size:0.8rem; margin-bottom:5px; opacity:0.7;">MATERIA</label>
+        <input type="text" name="materia" placeholder="Ej: Matemática" value="{{ tarea.materia if tarea else '' }}" required>
+        
+        <label style="display:block; text-align:left; font-size:0.8rem; margin-bottom:5px; opacity:0.7;">¿QUÉ HAY QUE HACER?</label>
+        <input type="text" name="tema" placeholder="Ej: Estudiar para el examen" value="{{ tarea.tema if tarea else '' }}" required>
+        
+        <label style="display:block; text-align:left; font-size:0.8rem; margin-bottom:5px; opacity:0.7;">FECHA LÍMITE</label>
+        <input type="date" name="fecha" value="{{ tarea.fecha if tarea else '' }}" required>
+        
+        <div style="margin: 25px 0;">
+            <input type="checkbox" name="importante" id="imp" style="display:none;" {{ 'checked' if tarea and tarea.importante else '' }}>
+            <label for="imp" class="btn-important-toggle">🔥 ¿ES PRIORIDAD ALTA?</label>
+        </div>
+
+        <button type="submit" class="btn-main">GUARDAR CAMBIOS</button>
+        <a href="{{ url_for('index') }}" style="display:block; margin-top:20px; color:var(--text); text-decoration:none; font-size:0.9rem; opacity:0.5;">← Volver atrás</a>
+    </form>
+</div>
+{% endblock %}
