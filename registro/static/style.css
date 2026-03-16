@@ -1,0 +1,100 @@
+:root {
+    --celeste: #74ACDF;
+    --blanco: #FFFFFF;
+    --oro: #F6B40E;
+    --gris-oscuro: #2c3e50;
+    --exito: #27ae60;
+    --error: #c0392b;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(to bottom, var(--celeste), var(--blanco), var(--celeste));
+    background-attachment: fixed;
+    margin: 0;
+    padding: 20px;
+    color: var(--gris-oscuro);
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    border-top: 8px solid var(--oro);
+}
+
+h2 { text-align: center; color: var(--gris-oscuro); text-transform: uppercase; }
+
+/* Dashboard de Estadísticas */
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card.promedio { background: var(--oro); }
+.card.aprobados { background: var(--exito); }
+.card.desaprobados { background: var(--error); }
+
+/* Buscador y Formulario */
+.seccion-arriba {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input {
+    padding: 12px;
+    border: 2px solid var(--celeste);
+    border-radius: 8px;
+    outline: none;
+}
+
+.btn-registrar {
+    background: var(--celeste);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn-registrar:hover { background: #5a90c5; }
+
+/* Tabla */
+table { width: 100%; border-collapse: collapse; margin-top: 20px; background: white; }
+th { background: var(--celeste); color: white; padding: 15px; }
+td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; }
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.badge.aprobado { background: #d4edda; color: #155724; }
+.badge.desaprobado { background: #f8d7da; color: #721c24; }
+
+/* Gráfico */
+.chart-box { max-width: 300px; margin: 30px auto; }

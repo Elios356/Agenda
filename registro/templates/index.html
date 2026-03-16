@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Académico Argentino</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h2> Gestión de Calificaciones</h2>
+
+        <div class="dashboard">
+            <div class="card promedio">Promedio General: {{ prom }}</div>
+            <div class="card aprobados">Aprobados: {{ ap }}</div>
+            <div class="card desaprobados">Desaprobados: {{ des }}</div>
+        </div>
+
+        <div class="seccion-arriba">
+            <form action="/registrar" method="POST">
+                <input type="text" name="nombre" placeholder="Nombre Alumno" required>
+                <input type="number" name="edad" placeholder="Edad" style="width: 60px;" required>
+                <input type="number" step="0.1" name="nota" placeholder="Nota (1-10)" min="1" max="10" required>
+                <button type="submit" class="btn-registrar">Registrar</button>
+            </form>
+            <input type="text" id="buscador" onkeyup="buscarAlumno()" placeholder="🔎 Buscar por nombre...">
+        </div>
+
+        <div style="display: flex; flex-wrap: wrap; gap: 40px;">
+            <div style="flex: 2;">
+                <table id="miTabla">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Edad</th>
+                            <th>Nota</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for a in alumnos %}
+                        <tr>
+                            <td>{{ a.nombre }}</td>
+                            <td>{{ a.edad }}</td>
+                            <td><strong>{{ a.calificacion }}</strong></td>
+                            <td><span class="badge {{ a.estado.lower() }}">{{ a.estado }}</span></td>
+                            <td>
+                                <button onclick="editarRegistro('{{ a.id }}', '{{ a.nombre }}')" style="border:none; background:none; cursor:pointer;">✏️</button>
+                                <a href="/eliminar/{{ a.id }}" onclick="return confirm('¿Eliminar registro?')" style="text-decoration:none;">🗑️</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="chart-box">
+                <canvas id="graficoNotas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <form id="formEdit" action="/editar" method="POST" style="display:none;">
+        <input type="hidden" name="id" id="editId">
+        <input type="hidden" name="nota" id="editNota">
+    </form>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Inicializar Gráfico
+        const ctx = document.getElementById('graficoNotas').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Aprobados', 'Desaprobados'],
+                datasets: [{
+                    data: [{{ ap }}, {{ des }}],
+                    backgroundColor: ['#27ae60', '#c0392b'],
+                    borderWidth: 5
+                }]
+            }
+        });
+    </script>
+</body>
+</html>
