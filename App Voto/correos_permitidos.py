@@ -5,19 +5,14 @@ class VerificadorCorreo:
     def __init__(self, archivo):
         self.correos = set()
 
-        if not os.path.exists(archivo):
-            print(f"⚠️ Error: No se encontró {archivo}")
-            return
-
-        try:
+        if os.path.exists(archivo):
             with open(archivo, "r", encoding="utf-8") as f:
-                self.correos = {
-                    linea.strip().lower()
-                    for linea in f
-                    if linea.strip()
-                }
-        except Exception as e:
-            print(f"❌ Error al leer correos: {e}")
+                for linea in f:
+                    correo = linea.strip().lower()
+                    if correo:
+                        self.correos.add(correo)
+        else:
+            print("No se encontró el archivo de correos permitidos")
 
     def correo_permitido(self, correo):
         return correo.lower() in self.correos
